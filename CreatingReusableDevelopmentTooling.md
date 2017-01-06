@@ -202,7 +202,7 @@ If you never create another React project, you might be done with our example `m
 
 Another benefit of this approach is a vast reduction in the number of `devDependencies` you have to manage in your projects because your development tooling module is handling them for you.
 
-Writing tests for your tooling also allows you to take advantage of tools like [Greenkeeper](http://greenkeeper.io/) independent of the projects your tooling is used in, automatically trigger builds when development dependencies are updated, giving you an early warning when there are incompatibilities.
+Writing tests also allows you to take advantage of tools like [Greenkeeper](http://greenkeeper.io/) independent of the projects your tooling is used in, automatically triggering builds when development dependencies are updated, giving you an early warning when there are incompatibilities.
 
 ## Playing with shiny new stuff
 
