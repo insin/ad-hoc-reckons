@@ -41,7 +41,7 @@ npm install --save react react-dom
 
 Instead of using `devDependencies` in your project's own `package.json` and keeping build configuration alongside your application code, create a new module which will own both the development dependencies your need (as its `dependencies`) and the base configuration required to use them.
 
-For the sake of simplicity, we'll start my manually create a new module in `node_modules/`:
+For the sake of simplicity, start by manually create a new module under `node_modules/`:
 
 ```sh
 mkdir node_modules/my-scripts/
@@ -194,7 +194,9 @@ This can be done as usual, but using `node_modules/my-scripts/` for development 
 
 The whole point of using a separate module is that you can eventually publish your build setup to npm or a private registry with a version number, then develop it further as a project in its own right with all the usual benefits a version number brings, like the ability to easily switch between different versions and push out fixes to old versions which are still in use.
 
-If you never create another React project, you might be done with our example `my-scripts` module, but if you need tooling for another project with identical setup and build needs, you can now have it without copy and pasting anything by publishing `my-scripts` and installing it as a `devDependency`. If you find that certain pieces of configuration need to change while working on a new project, you can make `my-scripts` capable of that, publish the new version and use it.
+If you never create another React project, you might be done with our example `my-scripts` module, but if you need tooling for another project with identical setup and build needs, you can now have it without copy and pasting anything by publishing `my-scripts` and installing it as a `devDependency`.
+
+If you find that certain pieces of configuration need to change while working on a new project, you can make `my-scripts` capable of that, publish the new version and use it.
 
 > There are additional niceties you may want to put in place before publishing, such as creating a [`bin` script](https://docs.npmjs.com/files/package.json#bin) (e.g. we might have configured the build above as `"build": "my-scripts build"` instead with a `bin` script and a bit of plumbing), but the key thing is the version number, which allows you to manage your entire development tooling like any other `devDependency`.
 
