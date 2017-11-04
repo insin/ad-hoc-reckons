@@ -60,16 +60,16 @@ The tricks we'll use to do this which make the resulting build configuration ind
 - using [`path.resolve()`](https://nodejs.org/api/path.html#path_path_resolve_paths) when referencing paths and files related to the application being built, as it resolves paths in the current working directory when given a relative path, which will be the example apps's root directory when running this script.
 
 ```sh
-npm install --save webpack@2.2.0-rc.3 html-webpack-plugin@2.24.0 babel-core babel-loader babel-preset-latest babel-preset-react
+npm install --save webpack@3 html-webpack-plugin@2 babel-core@6 babel-loader@7 babel-preset-env@1 babel-preset-react@6
 cat > webpack-build.js << ^D
 ```
 ```js
-const path = require('path')
+let path = require('path')
 
-const webpack = require('webpack')
-const HtmlPlugin = require('html-webpack-plugin')
+let webpack = require('webpack')
+let HtmlPlugin = require('html-webpack-plugin')
 
-const compiler = webpack({
+let compiler = webpack({
   devtool: 'source-map',
   entry: {
     app: path.resolve('src/index.js'),
@@ -85,7 +85,7 @@ const compiler = webpack({
         loader: require.resolve('babel-loader'),
         options: {
           presets: [
-            require.resolve('babel-preset-latest'),
+            require.resolve('babel-preset-env'),
             require.resolve('babel-preset-react'),
           ]
         },
@@ -165,7 +165,7 @@ Add a run-script to the example app's `package.json`:
 }
 ```
 
-Now run it:
+Now go back to the directory your app lives in and run the build:
 
 ```sh
 $ npm run build
@@ -173,13 +173,14 @@ $ npm run build
 > my-app@1.0.0 build /path/to-my-app
 > node ./node_modules/my-scripts/webpack-build
 
-Hash: b398953fca5836a56fef
-Version: webpack 2.2.0-rc.3
-Time: 18191ms
+Hash: a07a95da5c66aa112156
+Version: webpack 3.8.1
+Time: 2375ms
      Asset       Size  Chunks             Chunk Names
-    app.js     143 kB       0  [emitted]  app
-app.js.map     1.6 MB       0  [emitted]  app
+    app.js     117 kB       0  [emitted]  app
+app.js.map     424 kB       0  [emitted]  app
 index.html  349 bytes          [emitted]
+...
 ```
 
 ## Follow the same pattern
@@ -204,10 +205,10 @@ If you find that certain pieces of configuration need to change while working on
 
 Another benefit of this approach is a vast reduction in the number of `devDependencies` you have to manage in your projects because your development tooling module is handling them for you.
 
-Writing tests also allows you to take advantage of tools like [Greenkeeper](http://greenkeeper.io/) independent of the projects your tooling is used in, automatically triggering builds when development dependencies are updated, giving you an early warning when there are incompatibilities.
+Writing tests for your build tooling will also allow you to take advantage of tools like [Greenkeeper](http://greenkeeper.io/) independent of the projects your tooling is used in, automatically triggering builds when development dependencies are updated, giving you an early warning when there are incompatibilities.
 
 ## Playing with shiny new stuff
 
 Having a separate module for development tooling also gives you a place to play with shiny new stuff independent of the projects which are ticking away happily on older versions.
 
-My main project at work is still using Babel 5 via an old version of nwb because upgrading build tooling just hasn't been a priority, but when it happens the majority of work in upgrading to Babel 6 and Webpack 2 will be done by bumping a version number.
+At the time of writing my main project at work is still using Babel 5 and Webpack 1 via an old version of nwb because upgrading build tooling just hasn't been a priority, but when it happens the majority of work in upgrading to Babel 6 and Webpack 3 will be done by bumping a version number.
