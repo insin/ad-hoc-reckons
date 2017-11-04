@@ -66,8 +66,8 @@ cat > webpack-build.js << ^D
 ```js
 let path = require('path')
 
-let webpack = require('webpack')
 let HtmlPlugin = require('html-webpack-plugin')
+let webpack = require('webpack')
 
 let compiler = webpack({
   devtool: 'source-map',
